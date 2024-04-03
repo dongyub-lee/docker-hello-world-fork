@@ -18,7 +18,7 @@ podTemplate(label: 'docker-build',
   ]
 ) {
     node('docker-build') {
-        def dockerHubCred = 'dockerhub-credential-id-pw'
+        def dockerHubCred = credentials('dockerhub-credential-id-pw')
         def appImage
         
         stage('Checkout'){
@@ -30,7 +30,7 @@ podTemplate(label: 'docker-build',
         stage('Build'){
             container('docker'){
                 script {
-                    appImage = docker.build("dongyub/node-hello-world")
+                    appImage = docker.build("dongyub/docker-hello-world-fork")
                 }
             }
         }
