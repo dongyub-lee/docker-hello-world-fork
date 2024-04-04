@@ -18,15 +18,15 @@ podTemplate(label: 'docker-build',
   ]
 ) {
     node('docker-build') {
-        def dockerHubCred = credentials('dockerhub-credential-id-pw')
-        def dockerHubCred2 = 'dockerhub-credential-id-pw'
-        def dockerHubCred3 = dockerhub-credential-id-pw
+        def dockerHubCred = "dockerhub-credential-id-pw"
+        // def dockerHubCred = credentials('dockerhub-credential-id-pw')
+        // def dockerHubCred2 = 'dockerhub-credential-id-pw'
+        // def dockerHubCred3 = dockerhub-credential-id-pw
         def appImage
         
         stage('Checkout'){
             container('git'){
                 checkout scm
-                echo "DEBUGING Built dockerHubCred: ${dockerHubCred}"
             }
         }
         
@@ -34,7 +34,7 @@ podTemplate(label: 'docker-build',
             container('docker'){
                 script {
                     appImage = docker.build("dongyub/docker-hello-world-fork")
-                    echo "DEBUGING Built Docker image: ${appImage}"
+                    echo "---DEBUGING --------------Built Docker image: ${appImage}"
                 }
             }
         }
